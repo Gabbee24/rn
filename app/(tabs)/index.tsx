@@ -1,74 +1,103 @@
-import { Image, StyleSheet, Platform } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { StyleSheet, TextInput, Image, Platform, Text, View, SafeAreaView, TouchableOpacity, Button, StatusBar, FlatList } from 'react-native';
+import { Collapsible } from '@/components/Collapsible';
+import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+// import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks';
+import { useDeviceOrientation } from '@react-native-community/hooks';
+import { useState } from 'react';
+import Todoo from '@/components/Todo';
 
-export default function HomeScreen() {
+interface Todo {
+  id: string;
+  text: string;
+}
+
+interface TodoItemProp {
+  item: Todo;
+}
+
+export default function TabTwoScreen() {
+  // const { landscape } = useDeviceOrientation();
+  const landscape: string = useDeviceOrientation();
+
+  const [text, setText] = useState<string>('');
+  const [todo, setTodo] = useState<Todo[]>([]);
+
+  const addTodo = () => {
+    if (text.trim()) {
+      setTodo([...todo, { id: Date.now().toString(), text }]);
+      setText('');
+    }
+  };
+
+  const handleSubmit = () => {
+    addTodo();
+  }
+
+  const removeTodo = (id: string) => {
+    setTodo(todo.filter((todo) => todo.id !== id));
+  };
+
+  const renderTodo = ({ item }: TodoItemProp) => {
+    return (
+      <TouchableOpacity onLongPress={() => removeTodo(item.id)} >
+        <Text>{item.text}</Text>
+      </TouchableOpacity>
+    )
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.container} >
+      {/* <View style={{
+        backgroundColor: "skyblue",
+        width: "100%",
+        height: landscape ? "100%" : "30%",
+      }} >
+
+      </View> 
+      <TouchableOpacity>
+
+      <Image 
+      
+      source={require('../../assets/images/react-logo.png')} />
+      </TouchableOpacity>
+      <Text numberOfLines={1} >Hello Gabby Hello Gabby Hello Gabbby Hello Gabby Hello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello GabbyHello Gabby Hello Gabby Hello Gabbby Hello Gabby </Text>
+      <Button title='Submit' color='orange' onPress={() => alert("hello Gabby")}  /> */}
+
+        {/* <Text style={{color: 'red', fontSize: "22px"}} >Todo List</Text> */}
+        {/* <Text>Todo List</Text>
+        <TextInput
+          onChangeText={setText}
+          placeholder='Add new task'
+          onSubmitEditing={handleSubmit}
+          returnKeyType='done'
+          value={text} />
+
+        <Button title='Add task' onPress={addTodo} />
+
+        <FlatList
+          data={todo}
+          keyExtractor={item => item.id}
+          renderItem={renderTodo}
+        /> */}
+
+        <Todoo/>
+
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+
+  container: {
+    flex: 1,
+    backgroundColor: "gray",
+    alignItems: "center",
+    gap: "12px",
+    // paddingTop: `${Platform.OS} === "andriod" ? ${StatusBar.currentHeight} : "0"`,
   },
 });
