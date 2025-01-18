@@ -20,6 +20,7 @@ const Todoo = () => {
             setTodo([...todo, { id: Date.now().toString(), text }]);
             setText('');
         }
+        // console.warn("hello Gabby")
     }
 
     const handleSubmit = () => {
@@ -60,7 +61,7 @@ const Todoo = () => {
 
             <FlatList
                 data={todo}
-                // keyExtractor={(item) === item.id}
+                keyExtractor={(item) => item.id}
                 renderItem={renderTodo}
             />
 

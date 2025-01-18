@@ -10,6 +10,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { useDeviceOrientation } from '@react-native-community/hooks';
 import { useState } from 'react';
 import Todoo from '@/components/Todo';
+import DataFetching from '@/components/DataFetching';
 
 interface Todo {
   id: string;
@@ -85,7 +86,8 @@ export default function TabTwoScreen() {
           renderItem={renderTodo}
         /> */}
 
-        <Todoo/>
+        {/* <Todoo/> */}
+        <DataFetching/>
 
     </SafeAreaView>
   );
