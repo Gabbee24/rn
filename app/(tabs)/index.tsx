@@ -12,6 +12,7 @@ import { useState } from 'react';
 import Todoo from '@/components/Todo';
 import DataFetching from '@/components/DataFetching';
 import Meals from '@/components/Meals';
+import UserProfile from '@/components/UserProfile';
 
 interface Todo {
   id: string;
@@ -89,7 +90,8 @@ export default function TabTwoScreen() {
 
         {/* <Todoo/> */}
         {/* <DataFetching/> */}
-        <Meals/>
+        {/* <Meals/> */}
+        <UserProfile/>
 
     </SafeAreaView>
   );
