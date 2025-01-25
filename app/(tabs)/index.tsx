@@ -11,6 +11,7 @@ import { useDeviceOrientation } from '@react-native-community/hooks';
 import { useState } from 'react';
 import Todoo from '@/components/Todo';
 import DataFetching from '@/components/DataFetching';
+import Meals from '@/components/Meals';
 
 interface Todo {
   id: string;
@@ -87,7 +88,8 @@ export default function TabTwoScreen() {
         /> */}
 
         {/* <Todoo/> */}
-        <DataFetching/>
+        {/* <DataFetching/> */}
+        <Meals/>
 
     </SafeAreaView>
   );
