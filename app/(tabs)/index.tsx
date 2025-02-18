@@ -13,6 +13,7 @@ import Todoo from '@/components/Todo';
 import DataFetching from '@/components/DataFetching';
 import Meals from '@/components/Meals';
 import UserProfile from '@/components/UserProfile';
+import ReducerComp from '@/components/ReducerComp';
 
 interface Todo {
   id: string;
@@ -91,7 +92,8 @@ export default function TabTwoScreen() {
         {/* <Todoo/> */}
         {/* <DataFetching/> */}
         {/* <Meals/> */}
-        <UserProfile/>
+        {/* <UserProfile/> */}
+        <ReducerComp/>
 
     </SafeAreaView>
   );
