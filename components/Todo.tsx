@@ -41,7 +41,7 @@ const Todoo = () => {
 
     return (
         <View
-        style={tw`w-full`}
+        style={tw`w-full `}
         >
             <Text style={tw`text-red-600 mb-3 font-bold text-xl underline `} >Todo List</Text>
             <TextInput

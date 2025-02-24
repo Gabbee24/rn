@@ -94,7 +94,7 @@ export default function TabTwoScreen() {
         {/* <DataFetching/> */}
         {/* <Meals/> */}
         {/* <UserProfile/> */}
-        <ReducerComp/>
+        {/* <ReducerComp/> */}
         <ReducerTodo/>
 
     </SafeAreaView>
