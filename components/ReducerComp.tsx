@@ -6,7 +6,7 @@ interface State {
   count: number;
 }
 
-type Action = {type: "increment"} | {type: "decrement"};
+type Action = {type: "increment"} | {type: "decrement"} | {type: "reset"};
 
 const initialState : State = { count: 0 };
 
@@ -16,6 +16,8 @@ function reducer(state : State , action : Action ) {
       return { count: state.count + 1 };
     case "decrement":
       return { count: state.count - 1 };
+    case "reset":
+      return { count: 0 };
     default:
       throw new Error("Unhandled action type");
   }
@@ -39,6 +41,11 @@ const ReducerComp = () => {
         title='Increment'
         color="white"
         onPress={() => dispatch({ type: "increment" })}
+      />
+      <Button
+        title='Reset'
+        color="yellow"
+        onPress={() => dispatch({ type: "reset" })}
       />
     </View>
   )
